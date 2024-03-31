@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link rel="stylesheet" href="./Styles/styles.css">
-  <style>
 
-  </style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="./Styles/styles.css" />
+  <style></style>
 </head>
+
 <body>
   <nav>
     <a href="index.html">Home</a>
@@ -18,9 +18,51 @@
   </nav>
 
   <h1>Library Management System</h1>
-  
- 
-  <script src="./Scripts/script.js">
+
+  <h2>
+    Total Books:-
+    <span id="buy-count">0</span>
+  </h2>
+  <table id="buy-table">
+    <thead>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Description</th>
+      <th>Added Date</th>
+      <th>Category</th>
+      <th>Price</th>
+    </thead>
+    <tbody id="buy-table-body"></tbody>
+  </table>
+  <script >
+
+    var bookCount = document.querySelector("#buy-count")
+
+    var buyTable = document.querySelector("#buy-table");
+    var buyTableBody = document.querySelector("#buy-table-body");
+
+    var buyArr = JSON.parse(localStorage.getItem("buy-list")) || [];
+
+    function paint() {
+      bookCount.textContent = buyArr.length
+      buyTableBody.innerHTML = "";
+
+      buyArr.forEach((each, i) => {
+        var html = `
+                <tr>
+                  <td>${each.bookName}</td>
+                  <td>${each.authorName}</td>
+                  <td>${each.bookDesc}</td>
+                  <td>${each.bookAdded}</td>
+                  <td>${each.bookCategory}</td>
+                  <td>${each.bookPrice}</td>
+                </tr>`;
+        buyTableBody.innerHTML += html;
+      });
+    }
+
+    paint();
   </script>
 </body>
+
 </html>

@@ -18,8 +18,48 @@
   </nav>
 
   <h1>Library Management System</h1>
- 
-  <script src="./Scripts/script.js">
+  <h2>Total Books:- 
+    <span id = "bookmark-count">0</span>
+  </h2>
+  <table id="bookmark-table">
+    <thead>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Description</th>
+      <th>Added Date</th>
+      <th>Category</th>
+      <th>Price</th>
+    </thead>
+    <tbody id="bookmark-table-body"></tbody>
+  </table>
+  <script>
+    
+    var bookCount = document.querySelector("#bookmark-count")
+
+    var bookmarkTable = document.querySelector("#bookmark-table");
+    var bookmarkTableBody = document.querySelector("#bookmark-table-body");
+
+    var bookmarkArr = JSON.parse(localStorage.getItem("bookmark-list")) || [];
+
+    function paint() {
+      bookCount.textContent = bookmarkArr.length
+      bookmarkTableBody.innerHTML = "";
+
+      bookmarkArr.forEach((each, i) => {
+        var html = `
+                <tr>
+                  <td>${each.bookName}</td>
+                  <td>${each.authorName}</td>
+                  <td>${each.bookDesc}</td>
+                  <td>${each.bookAdded}</td>
+                  <td>${each.bookCategory}</td>
+                  <td>${each.bookPrice}</td>
+                </tr>`;
+        bookmarkTableBody.innerHTML += html;
+      });
+    }
+
+    paint();
   </script>
 </body>
 </html>

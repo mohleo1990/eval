@@ -16,6 +16,10 @@
     </nav>
 
     <h1>Library Management System</h1>
+
+    <h2>Total Books:- 
+      <span id = "book-count">0</span>
+    </h2>
     <table id="dash-table">
       <thead>
         <th>Name</th>
@@ -30,6 +34,8 @@
       <tbody id="dash-table-body"></tbody>
     </table>
     <script>
+      var bookCount = document.querySelector("#book-count")
+      
       var dashTable = document.querySelector("#dash-table");
       var dashTableBody = document.querySelector("#dash-table-body");
 
@@ -39,15 +45,19 @@
       var bookmarkArr = JSON.parse(localStorage.getItem("bookmark-list")) || [];
 
       function setBuyItemsAndPaint() {
+        localStorage.setItem("book-list", JSON.stringify(arr));
         localStorage.setItem("buy-list", JSON.stringify(buyArr));
         paint(buyArr);
       }
       function setBookmarkItemsAndPaint() {
+        localStorage.setItem("book-list", JSON.stringify(arr));
         localStorage.setItem("bookmark-list", JSON.stringify(bookmarkArr));
+
         paint(bookmarkArr);
       }
       // console.log(arr);
       function paint() {
+        bookCount.textContent = arr.length
         dashTableBody.innerHTML = "";
 
         arr.forEach((each, i) => {
@@ -68,13 +78,13 @@
       function buyItem(index) {
         buyArr.push(arr[index]);
         arr.splice(Number(index), 1);
-        console.log(buyArr);
+        paint()
         setBuyItemsAndPaint();
       }
       function bookmarkItem(index) {
         bookmarkArr.push(arr[index]);
         arr.splice(Number(index), 1);
-        console.log(bookmarkArr);
+        paint()
         setBookmarkItemsAndPaint();
       }
 

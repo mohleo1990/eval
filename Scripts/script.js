@@ -3,7 +3,6 @@ function setItemsAndPaint(arr){
   paint(arr)
 }
 
-
 var arr = JSON.parse(localStorage.getItem("book-list")) || []
 
 var form = document.querySelector('form')
