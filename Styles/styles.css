@@ -43,6 +43,7 @@ button{
   border: none;
   background-color: transparent;
   font-weight: 700;
+  cursor: pointer;
 }
 td:nth-child(6){
   background-color: green

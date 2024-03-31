@@ -33,6 +33,18 @@
       </thead>
       <tbody id="dash-table-body"></tbody>
     </table>
+
+   
+  <div id="filter">
+    <select name="" id="filterData">
+      <option value="">Filter by category</option>
+      <option value="self-help">Self Help</option>
+      <option value="fiction">Fiction</option>
+      <option value="finance">Finance</option>
+    </select>
+  </div>
+
+
     <script>
       var bookCount = document.querySelector("#book-count")
       
@@ -43,6 +55,16 @@
 
       var buyArr = JSON.parse(localStorage.getItem("buy-list")) || [];
       var bookmarkArr = JSON.parse(localStorage.getItem("bookmark-list")) || [];
+
+      var filterData = document.querySelector("#filterData");
+      filterData.addEventListener("change", () => filterByCategory());
+      function filterByCategory() {
+      var filterValue = filterData.value;
+
+      var filterCategory = arr.filter((each) => each.bookCategory === filterValue);
+  
+      paint(filterCategory);
+}
 
       function setBuyItemsAndPaint() {
         localStorage.setItem("book-list", JSON.stringify(arr));
@@ -56,7 +78,7 @@
         paint(bookmarkArr);
       }
       // console.log(arr);
-      function paint() {
+      function paint(arr) {
         bookCount.textContent = arr.length
         dashTableBody.innerHTML = "";
 
