@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./Styles/styles.css" />
+    <style></style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="buy.html">My Books</a>
+      <a href="bookmark.html">Bookmark</a>
+    </nav>
+
+    <h1>Library Management System</h1>
+    <table id="dash-table">
+      <thead>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th>Added Date</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Buy</th>
+        <th>Bookmark</th>
+      </thead>
+      <tbody id="dash-table-body"></tbody>
+    </table>
+    <script>
+      var dashTable = document.querySelector("#dash-table");
+      var dashTableBody = document.querySelector("#dash-table-body");
+
+      var arr = JSON.parse(localStorage.getItem("book-list")) || [];
+
+      var buyArr = JSON.parse(localStorage.getItem("buy-list")) || [];
+      var bookmarkArr = JSON.parse(localStorage.getItem("bookmark-list")) || [];
+
+      function setBuyItemsAndPaint() {
+        localStorage.setItem("buy-list", JSON.stringify(buyArr));
+        paint(buyArr);
+      }
+      function setBookmarkItemsAndPaint() {
+        localStorage.setItem("bookmark-list", JSON.stringify(bookmarkArr));
+        paint(bookmarkArr);
+      }
+      // console.log(arr);
+      function paint() {
+        dashTableBody.innerHTML = "";
+
+        arr.forEach((each, i) => {
+          var html = `
+    <tr>
+      <td>${each.bookName}</td>
+      <td>${each.authorName}</td>
+      <td>${each.bookDesc}</td>
+      <td>${each.bookAdded}</td>
+      <td>${each.bookCategory}</td>
+      <td><button onclick = "buyItem(${i})">Buy</button></td>
+      <td><button onclick = "bookmarkItem(${i})">Bookmark</button></td>
+    </tr>`;
+
+          dashTableBody.innerHTML += html;
+        });
+      }
+      function buyItem(index) {
+        buyArr.push(arr[index]);
+        arr.splice(Number(index), 1);
+        console.log(buyArr);
+        setBuyItemsAndPaint();
+      }
+      function bookmarkItem(index) {
+        bookmarkArr.push(arr[index]);
+        arr.splice(Number(index), 1);
+        console.log(bookmarkArr);
+        setBookmarkItemsAndPaint();
+      }
+
+      paint();
+    </script>
+  </body>
+</html>

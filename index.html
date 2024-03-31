@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="./Styles/styles.css">
+  <style>
+
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="buy.html">My Books</a>
+    <a href="bookmark.html">Bookmark</a>
+  </nav>
+
+  <h1>Library Management System</h1>
+  <form >
+     <input name="book-name" type="text" placeholder="Book Name">
+     <input name="author-name" type="text" placeholder="Author Name">
+     <input name="book-desc" type="text" placeholder="Book Description">
+
+    Adding Date <input type="date" name="book-added" id="added">
+
+    Book Category<select name="book-category" id="category">
+      <option value="">Select Category</option>
+      <option value="fiction">Fiction</option>
+      <option value="self-help">Self Help</option>
+      <option value="finance ">Finance </option>
+    </select>
+
+    <input type="number" name="book-price" placeholder="Books's Price">
+
+    <input type="Submit">
+  </form>
+  <script src="./Scripts/script.js">
+  </script>
+</body>
+</html>
